@@ -1,17 +1,17 @@
 #include "main.h"
 
 /**
-  * checks for lowercase characters
-  * Return 0
+  * _islower - checks for lowercase characters
+  * Return: 0
   */
-int _islower()
+int _islower(void)
 {
 	if (a <= c <= z)
 	{
-		return 1;
+		return (1);
 	}
 	else
 	{
-		return 0;
+		return (0);
 	}
 }
