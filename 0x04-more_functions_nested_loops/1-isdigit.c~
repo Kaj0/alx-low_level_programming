@@ -3,7 +3,6 @@
 /**
   * _isdigit - check for digit
   * @c: input
-  *
   * Return: 1 or 0
   */
 int _isdigit(int c)
@@ -14,6 +13,6 @@ int _isdigit(int c)
 	}
 	else
 	{
-	return (0);
+		return (0);
 	}
 }
