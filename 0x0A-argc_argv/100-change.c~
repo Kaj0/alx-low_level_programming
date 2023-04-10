@@ -1,8 +1,9 @@
 #include <stdio.h>
-#define COINS 5
+#define COINS 9
 #define MAX 20
  
-int coins[COINS] = { 1, 2, 5, 10, 25 };
+int coins[COINS] = { 1, 2, 5, 10, 20,
+                     50, 100, 200, 2000 };
  
 void findMin(int cost)
 {
@@ -31,7 +32,7 @@ int main(void)
  
     printf("The minimum number of coins to"
            "make change for %d: ",
-           n"\n");
+           n);
     findMin(n);
     return 0;
 }
