@@ -1,37 +1,54 @@
 #include <stdio.h>
-#define COINS 5
-#define MAX 20
- 
-int coins[COINS] = { 1, 2, 5, 10, 25 };
- 
-void findMin(int cost)
-{
-    int coin[MAX] = { 0 };
-    int i, k = 0;
- 
-    for (i = COINS - 1; i >= 0; i--) {
-        while (cost >= coins[i]) {
-            cost -= coins[i];
+#include <stdlib.h>
 
-            coin[k++] = coins[i];
-        }
-    }
- 
-    for (i = 0; i < k; i++) 
-    {
-        printf("%d ", coin[i]);
-    }
-    return;
-}
- 
-int main(void)
+/**
+  * main - prints minimum no of coins to
+  *        change a sum of money
+  * @argc: argument
+  * @argv: vector argument
+  * Return: 1 or 0
+  *
+  */
+int main(int argc, char *argv[])
 {
-    // input value
-    int n = 93;
- 
-    printf("The minimum number of coins to"
-           "make change for %d: ",
-           n"\n");
-    findMin(n);
-    return 0;
+	int cents, coins = 0;
+
+	if (argc != 2)
+	{
+		printf("Error\n");
+		return (1);
+	}
+	cents = atoi(argv[1]);
+
+	while (cents > 0)
+	{
+		coins++;
+		if ((cents - 25) >= 0)
+		{
+			cents -= 25;
+			continue;
+		}
+		if ((cents - 10) >= 0)
+		{
+			cents -= 10;
+			continue;
+		}
+		if ((cents - 5) >= 0)
+		{
+			cents -= 5;
+			continue;
+		}
+		if ((cents - 2) >= 0)
+		{
+			cents -= 2;
+			continue;
+		}
+		if ((cents - 1) >= 0)
+		{
+			cents -= 1;
+			continue;
+		}
+		cents--;
+	} printf("%d\n", coins);
+	return (0);
 }
