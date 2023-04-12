@@ -1,8 +1,9 @@
 #include "main.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
-  * argstostr - the function concatenates all arguments in your program
+  * argstostr - converts parameters passed to the program to str
   * @ac: counter argument
   * @av: vector argument
   * Return NULL or pointer to a new string

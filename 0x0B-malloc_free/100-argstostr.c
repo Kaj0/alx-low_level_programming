@@ -6,7 +6,7 @@
   * argstostr - converts parameters passed to the program to str
   * @ac: counter argument
   * @av: vector argument
-  * Return NULL or pointer to a new string
+  * Return: NULL or pointer to a new string
   *
   */
 char *argstostr(int ac, char **av)
