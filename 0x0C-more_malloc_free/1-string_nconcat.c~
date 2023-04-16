@@ -14,9 +14,9 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	char *ar;
 	unsigned int i = 0;
 	unsigned int j = 0;
-	unsigned int m;
-	unsigned int p;
-	unsigned int k = 0;
+	unsigned int k;
+	unsigned int l;
+	unsigned int m = 0;
 	unsigned int len;
 
 	if (s1 == NULL)
@@ -36,11 +36,11 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	if (ar == NULL)
 		return (NULL);
 
-	for (p = 0; p < i; p++)
-		ar[k++] = s1[p];
-	for (m = 0; m < j; m++)
-		ar[k++] = s2[m];
+	for (p = 0; l < i; l++)
+		ar[m++] = s1[l];
+	for (m = 0; k < j; k++)
+		ar[m++] = s2[k];
 
-	ar[k] = '\0';
+	ar[m] = '\0';
 	return (ar);
 }
