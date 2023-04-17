@@ -3,8 +3,8 @@
 
 /**
   * _calloc - allocates memory for an array
-  * @nmemb - number of members
-  * @size - size of member type
+  * @nmemb: number of members
+  * @size: size of member type
   * Return: a pointer that points to the allocated memory or NULL
   *
   */

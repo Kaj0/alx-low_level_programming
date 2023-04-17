@@ -3,8 +3,8 @@
 
 /**
   * array_range - creates an array of integers
-  * @min - smallest number
-  * @max - biggest number
+  * @min: smallest number
+  * @max: biggest number
   * Return: the pointer to the newly created array
   *
   */
