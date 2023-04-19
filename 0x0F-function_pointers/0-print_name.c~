@@ -3,5 +3,11 @@
 
 /**
   * print_name - prints a name
-  * @name:
-  * @f:
+  * @name: string
+  * @f: pointer
+  *
+  */
+void print_name(char *name, void (*f)(char *))
+{
+	f(name);
+}
