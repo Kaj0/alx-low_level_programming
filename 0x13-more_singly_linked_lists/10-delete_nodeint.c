@@ -2,7 +2,7 @@
 
 /**
   * delete_nodeint_at_index - deletes the node
-  * 			at index of a listint_t linked list
+  *			at index of a listint_t linked list
   * @head: ...
   * @index: ...
   * Return: 1 if it succeeded, -1 if it failed
