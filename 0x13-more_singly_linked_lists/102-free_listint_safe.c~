@@ -1,0 +1,12 @@
+#include "lists.h"
+
+/**
+  * free_listint_safe - finds the loop ina linked list
+  * @head: ...
+  * Return: address of the node where the loop starts,
+  *	or NULL if there is no loop
+  *
+  */
+size_t free_listint_safe(listint_t **h)
+{
+
