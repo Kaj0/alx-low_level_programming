@@ -7,10 +7,10 @@
  *
  * Return: read and printed number of letters
  */
-size_t read_textfile(const char *filename, size_t letters)
+ssize_t read_textfile(const char *filename, size_t letters)
 {
 	int filetxt;
-	size_t nrd, nwr;
+	ssize_t nrd, nwr;
 	char *buffer;
 
 	if (filename == NULL)
