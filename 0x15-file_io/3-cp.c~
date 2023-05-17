@@ -1,5 +1,5 @@
 #include "main.h"
-
+#include <stdio.h>
 /**
  * error_file - function to check if file can be opened.
  * @file_from: location of file
