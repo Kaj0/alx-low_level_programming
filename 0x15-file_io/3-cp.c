@@ -1,66 +1,100 @@
 #include "main.h"
 #include <stdio.h>
+#include <stdlib.h>
+
+char *create_buffer(char *file);
+void close_file(int fd);
 
 /**
- * main - ...
- * @argc: ...
- * @argv: ...
+ * create_buffer - ......
+ * @file: file
  *
+ * Return: pointer to newly-allocated buffer.
  */
-int main(int argc, char **argv)
+char *create_buffer(char *file)
 {
-	int file_from_desc, file_to_desc;
-	ssize_t num_read, num_written;
-	char buffer[1024];
-	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
+	char *buffer;
 
-	if (argc != 3)
-	{
-		dprintf(STDERR_FILENO, "Usage: cp %s %s\n", argv[1], argv[2]);
-		exit(97);
-	}
+	buffer = malloc(sizeof(char) * 1024);
 
-	file_from_desc = open(argv[1], O_RDONLY);
-	if (file_from_desc < 0)
+	if (buffer == NULL)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		exit(98);
-	}
-
-	file_to_desc = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, mode);
-	if (file_to_desc < 0)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+		dprintf(STDERR_FILENO,
+			"Error: Can't write to %s\n", file);
 		exit(99);
 	}
 
-	while ((num_read = read(file_from_desc, buffer, 1024)) > 0)
+	return (buffer);
+}
+
+/**
+ * close_file - function to close file descriptors
+ * @fd: file descriptor
+ */
+void close_file(int fd)
+{
+	int c;
+
+	c = close(fd);
+
+	if (c == -1)
 	{
-		num_written = write(file_to_desc, buffer, num_read);
-		if (num_written != num_read)
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		exit(100);
+	}
+}
+
+/**
+ * main - function to copy the content of a file to another file.
+ * @argc: counter argument
+ * @argv: vector argument
+ *
+ * Return: 0
+ *
+ */
+int main(int argc, char *argv[])
+{
+	int from, to, r, w;
+	char *buffer;
+
+	if (argc != 3)
+	{
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
+	}
+
+	buffer = create_buffer(argv[2]);
+	from = open(argv[1], O_RDONLY);
+	r = read(from, buffer, 1024);
+	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+
+	do {
+		if (from == -1 || r == -1)
 		{
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
+			dprintf(STDERR_FILENO,
+				"Error: Can't read from file %s\n", argv[1]);
+			free(buffer);
+			exit(98);
+		}
+
+		w = write(to, buffer, r);
+		if (to == -1 || w == -1)
+		{
+			dprintf(STDERR_FILENO,
+				"Error: Can't write to %s\n", argv[2]);
+			free(buffer);
 			exit(99);
 		}
-	}
 
-	if (num_read < 0)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		exit(98);
-	}
+		r = read(from, buffer, 1024);
+		to = open(argv[2], O_WRONLY | O_APPEND);
 
-	if (close(file_from_desc) < 0)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close %s\n", argv[1]);
-		exit(100);
-	}
+	} while (r > 0);
 
-	if (close(file_to_desc) < 0)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close %s\n", argv[1]);
-		exit(100);
-	}
+	free(buffer);
+	close_file(from);
+	close_file(to);
 
-	return (1);
+	return (0);
 }
+
