@@ -1,6 +1,7 @@
 #ifndef _MAIN_H
 #define _MAIN_H
 
+#include <elf.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
